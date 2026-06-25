@@ -25,7 +25,7 @@ strip_ansi() {
 msg_info() {
   local msg="$1"
   [[ -z "$msg" ]] && return
-  echo -e "[$(date '+%Y-%m-%d %H:%M:%S')] [${CYB}OK${CL}] $msg"
+  echo -e "[$(date '+%Y-%m-%d %H:%M:%S')] [${CYB}INFO${CL}] $msg"
 }
 
 msg_ok() {
