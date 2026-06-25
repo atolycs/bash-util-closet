@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+color() {
+  YW=$(echo "\033[33m")
+  YWB=$'\e[93m'
+  BL=$(echo "\033[36m")
+  RD=$(echo "\033[01;31m")
+  BGN=$(echo "\033[4;92m")
+  GN=$(echo "\033[1;92m")
+  DGN=$(echo "\033[32m")
+  CL=$(echo "\033[m")
+}
+
+color
+
+strip_ansi() {
+  if [[ $# -gt 0 ]]; then
+    echo -e "$*" | sed 's/\x1b\[[0-9;]*m//g; s/\x1b\[[0-9;]*[a-zA-Z]//g'
+  else
+    sed 's/\x1b\[[0-9;]*m//g; s/\x1b\[[0-9;]*[a-zA-Z]//g'
+  fi
+}
+
+msg_ok() {
+  local msg="$1"
+  [[ -z "$msg" ]] && return
+  echo -e "[$(date '+%Y-%m-%d %H:%M:%S')] [${GN}OK${CL}] $msg"
+}
+msg_warn() {
+  local msg="$1"
+  [[ -z "$msg" ]] && return
+  echo -e "[$(date '+%Y-%m-%d %H:%M:%S')] [${YWB}WARN${CL}] $msg"
+}
+
+msg_error() {
+  local msg="$1"
+  [[ -z "$msg" ]] && return
+  echo -e "[$(date '+%Y-%m-%d %H:%M:%S')] [${RD}ERROR${CL}] $msg"
+}
